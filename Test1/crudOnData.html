@@ -6,9 +6,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Bootstrap CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-		<title>CRUD Operation</title>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.css" rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.js"></script>
+        <title>CRUD Operation</title>
 	</head>
-	<body class="container-fuild bg-dark text-light" onload="checkUser()" >
+	<body class="container-fuild bg-dark text-light">
 		<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light py-3">
 			<div class="container-fluid">
 				<a class="navbar-brand ps-3" href="#">CRUD</a>
@@ -18,10 +24,16 @@
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<ul class="ms-4 nav nav-pills">
 						<li class="nav-item px-2" role="presentation">
-							<a class="nav-link btn btn-dark active" id="pills-display-tab" data-bs-toggle="pill" href="#pills-display" role="tab" aria-controls="pills-display" aria-selected="true">Display Data</a>
+							<a class="nav-link btn btn-dark active" id="pills-display-tab" onclick="dispData()" data-bs-toggle="pill" href="#pills-display" role="tab" aria-controls="pills-display" aria-selected="true">Display Data</a>
 						</li>
 						<li class="nav-item px-2" role="presentation">
 							<a class="nav-link btn btn-dark" id="pills-create-tab" data-bs-toggle="pill" href="#pills-create" role="tab" aria-controls="pills-create" aria-selected="false">Create Employee</a>
+						</li>
+						<li class="nav-item px-2" role="presentation">
+							<a class="nav-link btn btn-dark" id="pills-edit-tab" onclick="dispSelectData()" data-bs-toggle="pill" href="#pills-edit" role="tab" aria-controls="pills-edit" aria-selected="false">Edit Data</a>
+						</li>
+						<li class="nav-item px-2" role="presentation">
+							<a class="nav-link btn btn-dark" id="pills-delete-tab" onclick="dispDSelectData()" data-bs-toggle="pill" href="#pills-delete" role="tab" aria-controls="pills-delete" aria-selected="false">Delete Data</a>
 						</li>
 					</ul>
 				</div>
@@ -29,14 +41,28 @@
 		</nav>
 		<div class="tab-content" id="pills-tabContent">
 			<div class="tab-pane fade show active" id="pills-display" role="tabpanel" aria-labelledby="pills-display-tab">
-				<div class="align-middle fs-1 text-center" style="margin:20% 0%;">
-					Welcome To Demo of JS Form Validation
+				<div class="align-middle p-3 bg-light text-center" style="margin:2% 10%;">
+					<!-- <button class="btn btn-dark rounded-pill w-25 my-3" onclick="dispData()"> Display Data </button> -->
+					<table class="table table-light table-hover" id="displayemp"> 
+						<thead>
+							<tr>
+								<td>Email</td>
+								<td>Full Name</td>
+								<td>Age</td>
+								<td>Blood group</td>
+								<td>Phone no.</td>
+								<td>Job Title</td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<div class="tab-pane fade " style="margin:10% 0%;" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab">
 				<form class="w-50 mx-auto mt-5 border p-3 border-light border-2 rounded-3"  name="createform" onsubmit="return validateCFrom()" >
 					<fieldset >
-						<legend class="fs-3 fw-bold mb-5 text-center "> Create Employee</legend>
+						<legend class="fs-3 fw-bold mb-5 text-center ">Create Employee</legend>
 						<div class="row">
 							<div class="col-md-3">
 								<label class="form-label fs-4" for="fname">Full name</label>
@@ -74,20 +100,157 @@
 								<label class="form-label fs-4" for="phoneno">Phone Number</label>
 							</div>
 							<div class="col-md-9">
-								<input type="number" id="phoneno" class="form-control" placeholder="Enter Phone Number"  name="phoneno" /> 
+								<div class="input-group">
+									<span class="input-group-text" id="phonecode">
+										<select class="form-select" id="ccode" name="ccode"  aria-label="Country code select example" >
+											<option value=" " disabled selected>--Country code--</option>
+											<option value="+91">+91</option>
+											<option value="+1">+1</option>
+											<option value="+23">+23</option>
+											<option value="+5">+5</option>
+										</select>
+									</span>
+									<input type="number" id="phoneno" class="form-control" placeholder="Enter Phone Number"  name="phoneno" /> 
+								</div>
+							</div>
+                        </div>
+                        <div class="row mt-3">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="jobtitle">Job Title</label>
+							</div>
+							<div class="col-md-9">
+								<select class="form-select" id="jobtitle" name="jobtitle">
+                                    <option value="Customer Service">Customer Service</option>
+									<option value="Hospitality">Hospitality</option>
+									<option value="Real Estate">Real Estate</option>
+									<option value="Restaurant">Restaurant</option>
+									<option value="Retail">Retail</option>
+									<option value="Computer eng.">Computer eng.</option>
+									<option value="Chemical eng.">Chemical eng.</option>
+									<option value="Civil eng.">Civil eng.</option>
+									<option value="Mechanical eng.">Mechanical eng.</option>
+									<option value="Event Planning">Event Planning</option>
+                                    <option value="Fashion">Fashion</option>
+									<option value="Market Research">Market Research</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Social Media">Social Media</option>
+								</select>
 							</div>
 						</div>
 						<div class="my-4 text-center">
-						    <input type="submit" class="btn btn-light rounded-pill w-25 " name="create" value="Crate Employee" />
+						    <input type="submit" class="btn btn-light rounded-pill w-25 " name="create" value="Create Employee" />
+						</div>
+					</fieldset>
+				</form>
+            </div>
+			<div class="tab-pane fade" id="pills-edit" role="tabpanel" aria-labelledby="pills-edit-tab">
+				<form class="w-50 mx-auto mt-5 border p-3 border-light border-2 rounded-3"  name="editform" onsubmit="return editEmp()" >
+					<fieldset>
+						<legend class="fs-3 fw-bold mb-5 text-center ">Edit Employee</legend>
+						<div class="row">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="mails">Email</label>
+							</div>
+							<div class="col-md-9">
+								<select class="form-select" id="mails" name="mails"  aria-label="Email select example" required>
+									<option value=" " disabled selected>--Select Email--</option>
+								</select>
+							</div>
+                        </div>
+						<div id="editVis">
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label fs-4" for="efname">Full name</label>
+								</div>
+								<div class="col-md-9">
+									<input type="text" id="efname" class="form-control" placeholder="Enter Full Name"  name="efname" /> 
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label fs-4" for="ebdate">Birth Date</label>
+								</div>
+								<div class="col-md-9">
+									<input type="date" id="ebdate" class="form-control" name="ebdate" /> 
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label fs-4" for="ebgroup">Blood group</label>
+								</div>
+								<div class="col-md-9">
+									<input type="text" id="ebgroup" class="form-control" placeholder="Enter Blood Group"  name="ebgroup" /> 
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label fs-4" for="ephoneno">Phone Number</label>
+								</div>
+								<div class="col-md-9">
+									<div class="input-group">
+										<span class="input-group-text" id="phonecode">
+											<select class="form-select" id="eccode" name="eccode"  aria-label="Country code select example" >
+												<option value=" " disabled selected>--Country code--</option>
+												<option value="+91">+91</option>
+												<option value="+1">+1</option>
+												<option value="+23">+23</option>
+												<option value="+5">+5</option>
+											</select>
+										</span>
+										<input type="number" id="ephoneno" class="form-control" placeholder="Enter Phone Number"  name="ephoneno" /> 
+									</div>
+								</div>
+							</div>
+							<div class="row mt-3">
+								<div class="col-md-3">
+									<label class="form-label fs-4" for="ejobtitle">Job Title</label>
+								</div>
+								<div class="col-md-9">
+									<select class="form-select" id="ejobtitle" name="ejobtitle">
+										<option value="Customer Service">Customer Service</option>
+										<option value="Hospitality">Hospitality</option>
+										<option value="Real Estate">Real Estate</option>
+										<option value="Restaurant">Restaurant</option>
+										<option value="Retail">Retail</option>
+										<option value="Computer eng.">Computer eng.</option>
+										<option value="Chemical eng.">Chemical eng.</option>
+										<option value="Civil eng.">Civil eng.</option>
+										<option value="Mechanical eng.">Mechanical eng.</option>
+										<option value="Event Planning">Event Planning</option>
+										<option value="Fashion">Fashion</option>
+										<option value="Market Research">Market Research</option>
+										<option value="Marketing">Marketing</option>
+										<option value="Social Media">Social Media</option>
+									</select>
+								</div>
+							</div>	
+						</div>
+						<div class="my-4 text-center">
+							   <input type="submit" class="btn btn-light rounded-pill w-25 " name="edit" value="Edit Employee" />
 						</div>
 					</fieldset>
 				</form>
 			</div>
-
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		
-		<!-- Bootstrap Bundle with Popper -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+            <div class="tab-pane fade" id="pills-delete" role="tabpanel" aria-labelledby="pills-delete-tab">
+				<form class="w-50 mx-auto mt-5 border p-3 border-light border-2 rounded-3"  name="deleteform" onsubmit="return delEmp()" >
+					<fieldset>
+						<legend class="fs-3 fw-bold mb-5 text-center ">Delete Employee</legend>
+						<div class="row">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="dmails">Email</label>
+							</div>
+							<div class="col-md-9">
+								<select class="form-select" id="dmails" name="dmails"  aria-label="Email select example" required>
+									<option value=" " disabled selected>--Select Email--</option>
+								</select>
+							</div>
+                        </div>
+						<div class="my-4 text-center">
+							   <input type="submit" class="btn btn-light rounded-pill w-25 " name="delete" value="Delete Employee" />
+						</div>
+					</fieldset>
+				</form>
+			</div>
+        <script src="Data/demo.js"></script>
 	</body>
 </html>
