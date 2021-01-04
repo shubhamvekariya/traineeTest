@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<title>CRUD Operation</title>
+	</head>
+	<body class="container-fuild bg-dark text-light" onload="checkUser()" >
+		<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light py-3">
+			<div class="container-fluid">
+				<a class="navbar-brand ps-3" href="#">CRUD</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<ul class="ms-4 nav nav-pills">
+						<li class="nav-item px-2" role="presentation">
+							<a class="nav-link btn btn-dark active" id="pills-display-tab" data-bs-toggle="pill" href="#pills-display" role="tab" aria-controls="pills-display" aria-selected="true">Display Data</a>
+						</li>
+						<li class="nav-item px-2" role="presentation">
+							<a class="nav-link btn btn-dark" id="pills-create-tab" data-bs-toggle="pill" href="#pills-create" role="tab" aria-controls="pills-create" aria-selected="false">Create Employee</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="tab-content" id="pills-tabContent">
+			<div class="tab-pane fade show active" id="pills-display" role="tabpanel" aria-labelledby="pills-display-tab">
+				<div class="align-middle fs-1 text-center" style="margin:20% 0%;">
+					Welcome To Demo of JS Form Validation
+				</div>
+			</div>
+			<div class="tab-pane fade " style="margin:10% 0%;" id="pills-create" role="tabpanel" aria-labelledby="pills-create-tab">
+				<form class="w-50 mx-auto mt-5 border p-3 border-light border-2 rounded-3"  name="createform" onsubmit="return validateCFrom()" >
+					<fieldset >
+						<legend class="fs-3 fw-bold mb-5 text-center "> Create Employee</legend>
+						<div class="row">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="fname">Full name</label>
+							</div>
+							<div class="col-md-9">
+						        <input type="text" id="fname" class="form-control" placeholder="Enter Full Name"  name="fname" /> 
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="emailadd">Email</label>
+							</div>
+							<div class="col-md-9">
+								<input type="email" id="emailadd" class="form-control" placeholder="Enter Email"  name="emailadd" /> 
+							</div>
+                        </div>
+                        <div class="row mt-3">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="bdate">Birth Date</label>
+							</div>
+							<div class="col-md-9">
+								<input type="date" id="bdate" class="form-control" name="bdate" /> 
+							</div>
+                        </div>
+                        <div class="row mt-3">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="bgroup">Blood group</label>
+							</div>
+							<div class="col-md-9">
+								<input type="text" id="bgroup" class="form-control" placeholder="Enter Blood Group"  name="bgroup" /> 
+							</div>
+                        </div>
+                        <div class="row mt-3">
+							<div class="col-md-3">
+								<label class="form-label fs-4" for="phoneno">Phone Number</label>
+							</div>
+							<div class="col-md-9">
+								<input type="number" id="phoneno" class="form-control" placeholder="Enter Phone Number"  name="phoneno" /> 
+							</div>
+						</div>
+						<div class="my-4 text-center">
+						    <input type="submit" class="btn btn-light rounded-pill w-25 " name="create" value="Crate Employee" />
+						</div>
+					</fieldset>
+				</form>
+			</div>
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		
+		<!-- Bootstrap Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+	</body>
+</html>
