@@ -8,38 +8,20 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 		<title>Ajax</title>
 	</head>
-	<body class="container bg-secondary mt-5 pt-5">
+	<body class="container bg-secondary">
         <h1 class="text-center">Display data using AJAX</h1>
         <table class="table mt-5 table-hover text-center text-dark" id="demo"></table>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script>
-            $("#demo").load("./Data/cd.xml", function( rText, sText , xhr) {
-                if(sText == "success") {
-                    var i;
-                    var xmlDoc = $.parseXML(rText);
-				    var table="<tr><th>Titel</th><th>Artist</th><th>Country</th><th>Company</th><th>Price</th><th>Publish Year</th></tr>";
-					var $xml = $(xmlDoc);
-                    var x = $xml.find("CD");
-                    for (i = 0; i < x.length; i++) { 
-                        table += "<tr><td>" +
-						x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
-						"</td><td>" +
-						x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
-						"</td><td>" +
-						x[i].getElementsByTagName("COUNTRY")[0].childNodes[0].nodeValue +
-						"</td><td>" +
-						x[i].getElementsByTagName("COMPANY")[0].childNodes[0].nodeValue +
-						"</td><td>" +
-						x[i].getElementsByTagName("PRICE")[0].childNodes[0].nodeValue +
-						"</td><td>" +
-						x[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue +
-						"</td></tr>";
-                    }
-                    $("#demo").html(table);
-                }
-                if(sText == "error")
-					alert("Error: " + xhr.status + ": " + xhr.statusText);
-            });
+            $(document).ready(function() {
+				$.get("http://dummy.restapiexample.com/api/v1/employees", function( data, status ) {
+					var table="<tr classs='table-dark'><th>ID</th><th>Name</th><th>Age</th><th>Salary</th></tr>";
+					for( i=0; i<data.data.length ; i++ ) {
+						table += "<tr><td>" + data.data[i]["id"] + "</td><td>" + data.data[i]["employee_name"] + "</td><td>" + data.data[i]["employee_age"] + "</td><td>" + data.data[i]["employee_salary"] + "</td></tr>";
+					}
+					$("#demo").html(table);
+            	});
+			});
         </script>
 		<!-- Bootstrap Bundle with Popper -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
