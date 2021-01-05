@@ -118,12 +118,17 @@ function getEmail() {
 
 function dispData() {
 	var details = getEmail();
-	var table;
+	var table = "";
 	for( var i=0; i<details.length; i++) {
 		detail = localStorage.getItem(details[i]);
 		detail = JSON.parse(detail);
-		phone = detail.ccode+detail.phoneno;
-		table += "<tr><td>" + detail.email + "</td><td>" + detail.fname + "</td><td>" + detail.age + "</td><td>" + detail.bgroup + "</td><td>" + phone + "</td><td>" + detail.jobtitle + "</td></tr>";
+		fname = detail.fname == "" ?  "-" : detail.fname;
+		age = detail.age;
+		bgroup = detail.bgroup == "" ?  "-" : detail.bgroup;
+		ccode = detail.ccode == "" ?  "" : detail.ccode;
+		phone = detail.phoneno == "" ?  "-" : (ccode+detail.phoneno);
+		jobtitle = detail.jobtitle == "" ?  "-" : detail.jobtitle;
+		table += "<tr><td>" + details[i] + "</td><td>" + fname + "</td><td>" + age + "</td><td>" + bgroup + "</td><td>" + phone + "</td><td>" + jobtitle + "</td></tr>";
 	}
 	$("#displayemp > tbody").html(table);
 	$('#displayemp').DataTable();
