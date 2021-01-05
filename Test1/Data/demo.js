@@ -122,12 +122,12 @@ function dispData() {
 	for( var i=0; i<details.length; i++) {
 		detail = localStorage.getItem(details[i]);
 		detail = JSON.parse(detail);
-		fname = detail.fname == "" ?  "-" : detail.fname;
-		age = detail.age;
-		bgroup = detail.bgroup == "" ?  "-" : detail.bgroup;
-		ccode = detail.ccode == "" ?  "" : detail.ccode;
-		phone = detail.phoneno == "" ?  "-" : (ccode+detail.phoneno);
-		jobtitle = detail.jobtitle == "" ?  "-" : detail.jobtitle;
+		fname = detail.fname == "" || detail.fname == undefined ?  "-" : detail.fname;
+		age = detail.age == undefined ?  "-" : detail.age;
+		bgroup = detail.bgroup == "" || detail.fname == undefined ?  "-" : detail.bgroup;
+		ccode = detail.ccode == "" || detail.ccode == undefined ?  "" : detail.ccode;
+		phone = detail.phoneno == "" || detail.phoneno == undefined ?  "-" : (ccode+detail.phoneno);
+		jobtitle = detail.jobtitle == "" || detail.jobtitle == undefined ?  "-" : detail.jobtitle;
 		table += "<tr><td>" + details[i] + "</td><td>" + fname + "</td><td>" + age + "</td><td>" + bgroup + "</td><td>" + phone + "</td><td>" + jobtitle + "</td></tr>";
 	}
 	$("#displayemp > tbody").html(table);
