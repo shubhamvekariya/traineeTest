@@ -124,7 +124,7 @@ function dispData() {
 		detail = JSON.parse(detail);
 		fname = detail.fname == "" || detail.fname == undefined ?  "-" : detail.fname;
 		age = detail.age == undefined ?  "-" : detail.age;
-		bgroup = detail.bgroup == "" || detail.fname == undefined ?  "-" : detail.bgroup;
+		bgroup = detail.bgroup == "" || detail.bgroup == undefined ?  "-" : detail.bgroup;
 		ccode = detail.ccode == "" || detail.ccode == undefined ?  "" : detail.ccode;
 		phone = detail.phoneno == "" || detail.phoneno == undefined ?  "-" : (ccode+detail.phoneno);
 		jobtitle = detail.jobtitle == "" || detail.jobtitle == undefined ?  "-" : detail.jobtitle;
