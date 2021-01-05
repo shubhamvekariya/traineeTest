@@ -15,11 +15,19 @@
 		<script>
             $(document).ready(function() {
 				$.get("http://dummy.restapiexample.com/api/v1/employees", function( data, status ) {
-					var table="<tr classs='table-dark'><th>ID</th><th>Name</th><th>Age</th><th>Salary</th></tr>";
-					for( i=0; i<data.data.length ; i++ ) {
-						table += "<tr><td>" + data.data[i]["id"] + "</td><td>" + data.data[i]["employee_name"] + "</td><td>" + data.data[i]["employee_age"] + "</td><td>" + data.data[i]["employee_salary"] + "</td></tr>";
+					if(status == "success") {
+						if(data != null && data.data != null) {
+							var table="<tr classs='table-dark'><th>ID</th><th>Name</th><th>Age</th><th>Salary</th></tr>";
+							for( i=0; i<data.data.length ; i++ ) {
+								table += "<tr><td>" + data.data[i]["id"] + "</td><td>" + data.data[i]["employee_name"] + "</td><td>" + data.data[i]["employee_age"] + "</td><td>" + data.data[i]["employee_salary"] + "</td></tr>";
+							}
+							$("#demo").html(table);
+						}
 					}
-					$("#demo").html(table);
+					else {
+						alert("error: " + status);
+					}
+
             	});
 			});
         </script>
