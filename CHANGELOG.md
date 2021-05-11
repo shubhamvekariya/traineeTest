@@ -5,7 +5,7 @@
 #### Enhancements:
 
 - [#20](https://docs.zoho.com/sheet/open/ahzhoa0c2fa8f734248abbf1b16d11ae9c5d0?sheet=Sheet1&range=B21) Add document as other category
-- [#19](https://docs.zoho.com/sheet/open/ahzhoa0c2fa8f734248abbf1b16d11ae9c5d0?sheet=Sheet1&range=B20) New email triggers [#document](https://docs.zoho.com/ws/project/file/1nvs6a8815f1fc0ca4b86b05e47405b222462)
+- [#19](https://docs.zoho.com/sheet/open/ahzhoa0c2fa8f734248abbf1b16d11ae9c5d0?sheet=Sheet1&range=B20) New email triggers [document](https://docs.zoho.com/ws/project/file/1nvs6a8815f1fc0ca4b86b05e47405b222462)
 - [#18](https://docs.zoho.com/sheet/open/ahzhoa0c2fa8f734248abbf1b16d11ae9c5d0?sheet=Sheet1&range=B19) Email reminder for the pending documents
 - [#17](https://docs.zoho.com/sheet/open/ahzhoa0c2fa8f734248abbf1b16d11ae9c5d0?sheet=Sheet1&range=B18) Vendor soft delete option and recover removed vendors
 
