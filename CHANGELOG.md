@@ -23,7 +23,7 @@
 
 #### Enhancements:
 
-- [#1] Upgrade laravel version 5.7 to 6.0
+- [#1]() Upgrade laravel version 5.7 to 6.0
 
 #### Bug Fixes:
 
